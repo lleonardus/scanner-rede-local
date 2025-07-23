@@ -3,8 +3,9 @@ import nmap
 import netifaces
 
 # TODO: Automatizar escolha de interface, ou pelo menos colocar isso como um parâmetro
+INTERFACE = "enp2s0"
 
-addrs = netifaces.ifaddresses("enp2s0")
+addrs = netifaces.ifaddresses(INTERFACE)
 host_ip = addrs[netifaces.AF_INET][0]["addr"]  # Ex: 192.168.0.25
 nm = nmap.PortScanner()
 nm.scan(
