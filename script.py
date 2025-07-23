@@ -12,19 +12,19 @@ nm.scan(
 )  # Ping Scan (disable port scan)
 
 with open("relatorio.csv", "w", newline="") as csvfile:
-    spamwriter = csv.writer(csvfile, delimiter=";")
-    spamwriter.writerow(["IP", "MAC", "Fabricante"])
+    writer = csv.writer(csvfile, delimiter=";")
+    writer.writerow(["IP", "MAC", "Fabricante"])
     for host in nm.all_hosts():
         if nm[host]["status"]["reason"] != "localhost-response":
             mac = nm[host]["addresses"]["mac"]
             fabricante = list(nm[host]["vendor"].values())
-            spamwriter.writerow(
+            writer.writerow(
                 [host, mac, fabricante[0] if len(fabricante) > 0 else "null"]
             )
         else:
             mac = addrs[netifaces.AF_LINK][0]["addr"].upper()
             fabricante = list(nm[host]["vendor"].values())
-            spamwriter.writerow(
+            writer.writerow(
                 [host, mac, fabricante[0] if len(fabricante) > 0 else "null"]
             )
 
