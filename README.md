@@ -15,6 +15,10 @@ você deve setar essa variável para o nome da sua interface de rede default. Es
 nome pode ser obtido através do comando `ip route`.
 
 ```bash
+# Clonando o projeto e entrando na pasta
+$ git clone https://github.com/lleonardus/scanner-rede-local.git
+$ cd scanner-rede-local
+
 # Configurando virtual environment e instalando as dependências
 $ python3 -m venv .venv
 $ source .venv/bin/activate
