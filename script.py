@@ -1,18 +1,19 @@
-import csv
-import nmap
 import netifaces
+import nmap
+import csv
 
-# TODO: Automatizar escolha de interface, ou pelo menos colocar isso como um parâmetro
-INTERFACE = "enp2s0"
+gws = netifaces.gateways()
+default_gateway_ip = gws["default"][netifaces.AF_INET][0]
+interface_name = gws["default"][netifaces.AF_INET][1]
 
-addrs = netifaces.ifaddresses(INTERFACE)
-host_ip = addrs[netifaces.AF_INET][0]["addr"]  # Ex: 192.168.0.25
+addrs = netifaces.ifaddresses(interface_name)
+
 nm = nmap.PortScanner()
 nm.scan(
-    hosts=f"{host_ip}/24", arguments="-sn", sudo=True
+    hosts=f"{default_gateway_ip}/24", arguments="-sn", sudo=True
 )  # Ping Scan (disable port scan)
 
-with open("relatorio.csv", "w", newline="") as csvfile:
+with open(file="relatorio.csv", mode="w", newline="") as csvfile:
     writer = csv.writer(csvfile, delimiter=";")
     writer.writerow(["IP", "MAC", "Fabricante"])
     for host in nm.all_hosts():
