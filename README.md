@@ -10,11 +10,7 @@
 
 ## 💿 Como rodar na sua máquina (Linux)
 
-&rarr; Dentro do script, tem uma variável chamada `INTERFACE`. Antes de rodar o script,
-você deve setar essa variável para o nome da sua interface de rede default. Esse
-nome pode ser obtido através do comando `ip route`.
-
-**Obs**: Para rodar esse script é necessário ter o nmap instalado na sua
+Para rodar esse script é necessário ter o nmap instalado na sua
 máquina!
 
 ```bash
