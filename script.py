@@ -11,21 +11,17 @@ addrs = netifaces.ifaddresses(interface_name)
 nm = nmap.PortScanner()
 nm.scan(hosts=f"{default_gateway_ip}/24", arguments="-sn", sudo=True)
 
-with open(file="relatorio.csv", mode="w", newline="") as csvfile:
-    writer = csv.writer(csvfile, delimiter=";")
-    writer.writerow(["IP", "MAC", "Fabricante"])
+with open(file="report.csv", mode="w", newline="", encoding="utf-8") as csv_file:
+    writer = csv.writer(csv_file, delimiter=";")
+    writer.writerow(["IP", "MAC", "Vendor"])
     for host in nm.all_hosts():
         if nm[host]["status"]["reason"] != "localhost-response":
             mac = nm[host]["addresses"]["mac"]
-            fabricante = list(nm[host]["vendor"].values())
-            writer.writerow(
-                [host, mac, fabricante[0] if len(fabricante) > 0 else "null"]
-            )
+            vendor = list(nm[host]["vendor"].values())
+            writer.writerow([host, mac, vendor[0] if len(vendor) > 0 else "Unknown"])
         else:
             mac = addrs[netifaces.AF_LINK][0]["addr"].upper()
-            fabricante = list(nm[host]["vendor"].values())
-            writer.writerow(
-                [host, mac, fabricante[0] if len(fabricante) > 0 else "null"]
-            )
+            vendor = list(nm[host]["vendor"].values())
+            writer.writerow([host, mac, vendor[0] if len(vendor) > 0 else "Unknown"])
 
-print("Relatório concluído e salvo em relatorio.csv")
+print("Report completed and saved in report.csv")

@@ -1,8 +1,8 @@
 # 🖧 Scanner de Rede Local
 
 O objetivo do script é fazer um [Ping Scan (Host Discovery sem escanear portas)](https://nmap.org/book/man-host-discovery.html)
-da rede local e gerar um relatório em CSV, contendo informações como endereço IP,
-endereço MAC e Fabricante da Placa de Rede dos dispositivos.
+da rede local e gerar um relatório em CSV contendo informações como endereço IP,
+endereço MAC e Vendor (Fabricante da Placa de Rede dos dispositivos).
 
 Para realizar esse scan no terminal, o comando escolhido seria algo do tipo
 `sudo nmap -sn <range_de_endereços_IP>`. Como queremos automatizar isso com Python,
@@ -19,7 +19,7 @@ lib também resolve o problema de encontrar o endereço MAC da própria máquina
 fornece o endereço MAC do localhost, então tive que utilizar esse artifício para
 disponibilizar esse dado no relatório final.
 
-![Exemplo de Output](./docs/images/output-exemplo.png)
+![Exemplo de Output](./docs/images/output-example.png)
 
 ## 💿 Como rodar na sua máquina (Linux)
 
@@ -39,7 +39,7 @@ $ python3 -m venv .venv
 $ source .venv/bin/activate
 $ python3 -m pip install -r requirements.txt
 
-# Agora é só executar o script, que deve gerar um arquivo relatorio.csv na raiz
+# Agora é só executar o script, que deve gerar um arquivo report.csv na raiz
 # do projeto
 $ python3 script.py
 ```
