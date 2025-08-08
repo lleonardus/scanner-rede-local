@@ -9,9 +9,7 @@ interface_name = gws["default"][netifaces.AF_INET][1]
 addrs = netifaces.ifaddresses(interface_name)
 
 nm = nmap.PortScanner()
-nm.scan(
-    hosts=f"{default_gateway_ip}/24", arguments="-sn", sudo=True
-)  # Ping Scan (disable port scan)
+nm.scan(hosts=f"{default_gateway_ip}/24", arguments="-sn", sudo=True)
 
 with open(file="relatorio.csv", mode="w", newline="") as csvfile:
     writer = csv.writer(csvfile, delimiter=";")

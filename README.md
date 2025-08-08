@@ -1,17 +1,33 @@
 # 🖧 Scanner de Rede Local
 
-&rarr; Um script simples feito em Python com os objetivos de:
+O objetivo do script é fazer um [Ping Scan (Host Discovery sem escanear portas)](https://nmap.org/book/man-host-discovery.html)
+da rede local e gerar um relatório em CSV, contendo informações como endereço IP,
+endereço MAC e Fabricante da Placa de Rede dos dispositivos.
 
-- Descobrir todos os dispositivos ativos na rede local;
-- Gerar uma tabela com IP, MAC e Fabricante da placa de rede desses dispositivos;
-- Exportar os resultados para um arquivo CSV.
+Para realizar esse scan no terminal, o comando escolhido seria algo do tipo
+`sudo nmap -sn <range_de_endereços_IP>`. Como queremos automatizar isso com Python,
+escolhi a biblioteca [python-nmap](https://pypi.org/project/python-nmap/) que
+serve como um wrapper para o nmap e facilita o uso da ferramenta dentro do
+script.
+
+Para podermos fazer o scan da rede, precisamos de um endereço IP daquela rede
+e a forma escolhida para obter essa informação foi a utilização da biblioteca
+[netifaces](https://pypi.org/project/netifaces/). Nessa lib, tem um método
+chamado `gateways` que nos dá informações sobre os gateways da máquina. Além de
+resolver o problema de achar de forma automática um endereço IP da rede, essa
+lib também resolve o problema de encontrar o endereço MAC da própria máquina. O nmap não
+fornece o endereço MAC do localhost, então tive que utilizar esse artifício para
+disponibilizar esse dado no relatório final.
 
 ![Exemplo de Output](./docs/images/output-exemplo.png)
 
 ## 💿 Como rodar na sua máquina (Linux)
 
-Para rodar esse script é necessário ter o nmap instalado na sua
-máquina!
+### 📝 Pré-requisitos:
+
+- [Git](https://git-scm.com/downloads)
+- [Nmap](https://nmap.org/download.html)
+- [Python 3.x](https://www.python.org/downloads/)
 
 ```bash
 # Clonando o projeto e entrando na pasta
@@ -30,6 +46,8 @@ $ python3 script.py
 
 ## 🧰 Ferramentas Utilizadas
 
+- [Git](https://git-scm.com/downloads)
+- [Nmap](https://nmap.org/download.html)
 - [Python](https://docs.python.org/3/)
 - [python-nmap](https://pypi.org/project/python-nmap/)
 - [netifaces](https://pypi.org/project/netifaces/)
